@@ -22,6 +22,11 @@ const connect = async () => {
     } 
 };
 
+app.use(cors({
+    origin: true,
+    exposedHeaders: ['Authorization'], 
+  }));
+  
 //middlewares
 app.use(cookieParser())
 app.use(express.json())
