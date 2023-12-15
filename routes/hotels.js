@@ -20,7 +20,7 @@ router.get("/countbycity", countByCity)
 router.get("/countbytype", countByType)
 
 //DELETE
-router.delete("/:id", verifyAdmin, deleteHotel)
+router.delete("/find/:id", verifyAdmin, deleteHotel)
 
 
 
