@@ -37,3 +37,11 @@ export const getIdUser = async(req,res,next)=>{
     }
 }
 
+export const countUsers = async (req, res, next) => {
+    try {
+      const totalUsers = await user.countDocuments(); 
+      res.status(200).json({ totalUsers });
+    } catch (err) {
+      next(err);
+    }
+  };
