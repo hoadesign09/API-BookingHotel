@@ -44,3 +44,14 @@ export const login = async (req, res, next) => {
         next(err)
     }
 }
+export const logout = async (req, res, next) => {
+    try {
+        // Xóa cookie 'access_token' bằng cách gửi một cookie với giá trị rỗng và thời gian hết hạn ngay lập tức
+        res.cookie('access_token', '', {
+            httpOnly: true,
+            expires: new Date(0)
+        }).status(200).send('Logged out successfully');
+    } catch (err) {
+        next(err);
+    }
+};
