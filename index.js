@@ -12,6 +12,8 @@ const app = express()
 dotenv.config()
 app.use(cors());
 
+let userActivityLogs = [];
+
 
 const connect = async () => {
     try {
@@ -30,7 +32,23 @@ app.use(cors({
 //middlewares
 app.use(cookieParser())
 app.use(express.json())
+  
+app.use( (req, res, next) => {
+    const logData = {
+      timestamp: new Date().toISOString(),
+      userId: req._id, 
+      endpoint: req.path,
+      method: req.method
+    };
+    userActivityLogs.push(logData);
+    next();
+});
 
+
+
+app.get("/api/logs", (req, res) => {
+    res.json(userActivityLogs);
+  });
 app.use("/api/auth", authRoute)
 app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)
@@ -46,6 +64,7 @@ app.use((err, req, res, next)=>{
         stack: err.stack,
     })
 })
+
 
 app.listen(8008, () => {
     connect()

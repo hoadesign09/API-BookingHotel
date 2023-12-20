@@ -100,3 +100,14 @@ export const getHotelRooms = async (req, res, next) => {
       next(err);
     }
   };
+
+  export const getHotelsByUserCity = async (req, res, next) => {
+    const userCity = req.body.city;
+    try {
+        const hotelsInUserCity = await hotel.find({ city: userCity });
+        res.status(200).json(hotelsInUserCity);
+    } catch (err) {
+        next(err);
+    }
+};
+

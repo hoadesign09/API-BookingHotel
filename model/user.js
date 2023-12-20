@@ -17,7 +17,8 @@ const UserSchema = new Schema({
         required: true
     },
     img: {
-        type: String
+        type: String,
+        default: "https://i.ibb.co/MBtjqXQ/no-avatar.gif",
     },
     city: {
         type: String,
