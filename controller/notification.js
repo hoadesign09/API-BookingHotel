@@ -18,3 +18,12 @@ export const getNotifications = async (req, res) => {
       res.status(500).json({ message: 'Đã có lỗi xảy ra khi lấy danh sách thông báo.' });
     }
   };
+
+  export const deleteNoti = async (req, res, next) => {
+    try {
+      await notifications.findByIdAndDelete(req.params.id);
+      res.status(200).json("Notification has been delete!");
+    } catch (err) {
+      next(err);
+    }
+  };

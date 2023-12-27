@@ -1,5 +1,5 @@
 import express from "express"
-import { createNotification, getNotifications} from './../controller/notification.js';
+import { createNotification, deleteNoti, getNotifications} from './../controller/notification.js';
 import {verifyAdmin} from "../utils/verifyToken.js";
 
 
@@ -9,5 +9,5 @@ const router = express.Router();
 router.post("/", verifyAdmin, createNotification)
 //GET
 router.get("/", verifyAdmin, getNotifications)
-
+router.delete("/:id", verifyAdmin, deleteNoti)
 export default router

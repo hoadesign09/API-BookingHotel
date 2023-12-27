@@ -6,12 +6,12 @@ import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import notificationRoute from "./routes/notifications.js"
+import ticketRoute from "./routes/tickets.js"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
 const app = express()
 dotenv.config()
-app.use(cors());
 
 let userActivityLogs = [];
 
@@ -37,9 +37,9 @@ app.use(express.json())
 app.use( (req, res, next) => {
     const logData = {
       timestamp: new Date().toISOString(),
-      userId: req._id, 
+      userId: req.id, 
       endpoint: req.path,
-      method: req.method
+      method: req.method,
     };
     userActivityLogs.push(logData);
     next();
@@ -55,6 +55,7 @@ app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)
 app.use("/api/rooms", roomsRoute)
 app.use("/api/notifications", notificationRoute)
+app.use("/api/tickets", ticketRoute)
 
 app.use((err, req, res, next)=>{
     const errStatus = err.status || 500;

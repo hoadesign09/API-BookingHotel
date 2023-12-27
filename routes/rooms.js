@@ -1,5 +1,5 @@
 import express from "express"
-import { createRoom, updateRoom, getIdRoom, getRooms, deleteRoom } from "../controller/room.js"
+import { createRoom, updateRoom, getIdRoom, getRooms, deleteRoom, updateRoomAvailability } from "../controller/room.js"
 import {verifyAdmin} from "../utils/verifyToken.js"
 
 
@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("/:hotelid", verifyAdmin, createRoom)
 //UPDATE
 router.put("/:id", verifyAdmin, updateRoom)
+router.put("/availability/:id", updateRoomAvailability)
 //GET BY ID
 router.get("/:id", getIdRoom)
 //GET ALL
